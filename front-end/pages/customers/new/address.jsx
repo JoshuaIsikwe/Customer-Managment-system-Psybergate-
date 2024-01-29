@@ -28,7 +28,7 @@ function changeCustomerAddress() {
 }
 function handleNext(){
   try {
-      validateUserDetails();
+      //validateUserDetails();
       changeCustomerAddress();
       router.push('/customers/new/comments');
   } catch (e) {

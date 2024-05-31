@@ -16,7 +16,7 @@ app.post("/customers", async(req, res)=>{
    surname: req.body?.surname ?? '',
    cell: req.body?.cell ?? '',
    physicalAddress: req.body?.physicalAddress ?? '',
-   comments: req.body?.comments ?? '',
+   comment: req.body?.comment ?? '',
   }
   const results = await db.createCustomer(customer);
   res.status(201).json({id : results[0]});

@@ -33,11 +33,11 @@ export default function CustomerDetails() {
           <FaUserAlt className= "text-8xl mb-10"/>
       </div>
       <div className='flex flex-col gap-3'>
-        <h1 className='text-4xl'>Name: {customer.firstName}</h1>
-        <h1>Cell number: {customer.surname} </h1>
+        <h1 className='text-4xl'>Name: {customer.firstName} {customer.surname}</h1>
+        <h1>Cell number: {customer.cell} </h1>
         <h1>Physical Address: {customer.physicalAddress}</h1>
         <h1>Postal Address: {customer.postalAddress} </h1>
-        <h1>Comments: {customer.comments} </h1>
+        <h1>Comments: {customer.comment} </h1>
       </div>
     </div>
   )

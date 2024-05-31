@@ -1,13 +1,14 @@
 'use client'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import AppContext from '@/components/AppContext'
 import { useRouter } from 'next/navigation'
+import { data } from 'autoprefixer'
 
 const details = () => {
 
-  const [firstName, setName] = useState(''); 
-  const [surname, setSurname] = useState(''); 
-  const [cell, setCell] = useState(''); 
+  const firstName = useRef(null)
+  const surname = useRef(null)
+  const cell = useRef(null)
   const [errors, setErrors] = useState({});
 
 const router = useRouter()
@@ -16,9 +17,9 @@ console.log(errors)
 
 //Stores states globally
 function changeCustomerDetails() {
-  context.setName(firstName)
-  context.setSurname(surname)
-  context.setCell(cell)
+  context.setName(firstName.current.value)
+  context.setSurname(surname.current.value)
+  context.setCell(cell.current.value)
 }
 function handleNext(){
   try {
@@ -33,20 +34,20 @@ function handleNext(){
 function validateUserDetails(){
   const validationErrors = {};
 
-  if (firstName === '') {
+  if (firstName.current.value === '') {
       validationErrors.firstName = 'First Name is required';
   }
 
-  if (surname === '') {
+  if (surname.current.value === '') {
       validationErrors.surname = 'Surname is required';
   }
 
-  if (cell === '') {
+  if (cell.current.value === '') {
       validationErrors.cell= 'Cell is required';
   }
 
   setErrors(validationErrors);
-  if(Object.keys(errors).length===0){
+  if(Object.keys(errors).length===0|| null){
       throw new Error('Validation error');
   }
 }
@@ -58,17 +59,17 @@ function validateUserDetails(){
         <form action="" className='flex flex-col items-left w-full justify-between p-10' >
           <label className='text-xl text-left font-bold'>First Name</label>
           <input className='border-2 border-gray-400 w-full rounded-lg p-2 mb-7 '
-            type='text' name='name' value={firstName} onChange={(e) => {firstName: setName(e.target.value)}} 
+            type='text' name='name' ref={firstName}
           />
           {'firstName' in errors && (<p className='text-sm text-red-700'>{errors.firstName}</p>)}
           <label className='text-xl text-left font-bold'>Last Name</label>
           <input className='border-2 border-gray-400 w-full rounded-lg p-2 mb-7 ' 
-            type='text' name='surname' value={surname} onChange={(e) => setSurname(e.target.value)} 
+            type='text' name='surname' ref={surname}  
           />
           {'surname' in errors && (<p className='text-sm text-red-700'>{errors.surname}</p>)}
           <label className='text-xl text-left font-bold'>Cell phone</label>
           <input className='border-2 border-gray-400 w-full rounded-lg p-2 mb-7 ' 
-            type='tel' name='cell' value={cell} onChange={(e) => setCell(e.target.value)} 
+            type='tel' name='cell' ref={cell} 
           /> 
           {'cell' in errors && (<p className='text-sm text-red-700'>{errors.cell}</p>)}
         </form>

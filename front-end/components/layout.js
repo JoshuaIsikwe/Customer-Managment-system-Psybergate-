@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function RootLayout({ children }) {
 
-    const [firstName, setName] = useState(null); 
+    const [firstName, setName] = useState(''); 
     const [surname, setSurname] = useState(''); 
     const [cell, setCell] = useState(''); 
     const [physicalAddress, setPhysicalAddress] = useState(''); 
